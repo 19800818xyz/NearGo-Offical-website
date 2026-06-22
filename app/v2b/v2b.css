@@ -1,0 +1,120 @@
+/* ============================================================
+   NearGo v2b — Roulette #9: Pixel-Game Side-Scroller (retro arcade)
+   (huashu-design logic-one: time-roll a style to break the safe bias)
+   Bold/playful: "level up your business" arcade metaphor, pixel HUD,
+   chunky stepped-shadow buttons, level-colored sections.
+   Degradation (≈70%): NO hand-drawn pixel art — real photos sit in
+   chunky pixel frames; long body copy stays in a readable sans.
+   Brand orange = the "coin / energy" color. Scoped under .v2b.
+   ============================================================ */
+
+.v2b {
+  --bg: #160f08;
+  --bg-2: #211609;
+  --panel: #2b1d0c;
+  --cream: #f4ead6;
+  --cream-dim: #b9a583;
+  --coin: #ff9f1c;        /* brand orange → coin/energy */
+  --coin-deep: #c9760a;
+  --lv1: #8bd450;         /* level greens/blues for section accents */
+  --lv2: #4cc9f0;
+  --lv3: #ff7b54;
+  --line: #4a3416;
+  --pixel: "Press Start 2P", monospace;
+  --vt: "VT323", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+}
+.v2b * { box-sizing: border-box; }
+.v2b ::selection { background: var(--coin); color: #160f08; }
+/* CRT scanlines */
+.v2b::before {
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.06) 2px 3px);
+}
+.v2b .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+.v2b .pixel { font-family: var(--pixel); }
+.v2b .vt { font-family: var(--vt); }
+.v2b .coin { color: var(--coin); }
+
+/* HUD top bar */
+.v2b .hud {
+  position: sticky; top: 0; z-index: 20; background: var(--bg-2);
+  border-bottom: 3px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 28px;
+}
+.v2b .logo { font-family: var(--pixel); font-size: 16px; color: var(--cream); letter-spacing: 1px; }
+.v2b .logo b { color: var(--coin); }
+.v2b .hud-menu { display: flex; gap: 22px; font-family: var(--vt); font-size: 22px; }
+.v2b .hud-menu a { color: var(--cream-dim); text-decoration: none; }
+.v2b .hud-menu a:hover { color: var(--coin); }
+.v2b .credits { font-family: var(--vt); font-size: 20px; color: var(--lv1); }
+@media (max-width: 820px){ .v2b .hud-menu{ display:none; } }
+
+/* pixel button */
+.v2b .pbtn {
+  display: inline-block; font-family: var(--pixel); font-size: 12px; line-height: 1.4;
+  text-decoration: none; padding: 14px 20px; border: 3px solid #160f08;
+  background: var(--coin); color: #160f08; box-shadow: 5px 5px 0 #160f08;
+  transition: transform .05s, box-shadow .05s;
+}
+.v2b .pbtn:active { transform: translate(5px,5px); box-shadow: 0 0 0 #160f08; }
+.v2b .pbtn.alt { background: var(--bg-2); color: var(--cream); box-shadow: 5px 5px 0 var(--line); border-color: var(--line); }
+
+/* hero */
+.v2b .hero { padding: 70px 0 60px; text-align: left; }
+.v2b .tag { font-family: var(--vt); font-size: 24px; color: var(--lv2); letter-spacing: 1px; }
+.v2b h1.title {
+  font-family: var(--pixel); font-size: clamp(22px, 4.4vw, 46px); line-height: 1.5;
+  margin: 18px 0 0; color: var(--cream); text-shadow: 4px 4px 0 var(--coin-deep);
+}
+.v2b h1.title .hl { color: var(--coin); }
+.v2b .sub { margin: 26px 0 0; max-width: 52ch; font-size: 18px; line-height: 1.6; color: var(--cream-dim); }
+.v2b .hero-actions { margin-top: 30px; display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* HUD stat panels */
+.v2b .scores { margin-top: 56px; display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.v2b .score { background: var(--panel); border: 3px solid var(--line); padding: 18px; }
+.v2b .score .k { font-family: var(--pixel); font-size: 9px; color: var(--cream-dim); letter-spacing: 1px; }
+.v2b .score .v { font-family: var(--vt); font-size: 56px; line-height: .9; margin-top: 6px; color: var(--coin); }
+.v2b .score .v sup { font-size: .42em; color: var(--lv1); }
+@media (max-width: 820px){ .v2b .scores{ grid-template-columns:1fr 1fr; } }
+
+/* levels (products) */
+.v2b .level { padding: 70px 0; border-top: 3px dashed var(--line); }
+.v2b .level-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.v2b .level.flip .ltext { order: 2; }
+@media (max-width: 900px){ .v2b .level-grid{ grid-template-columns:1fr; gap:28px; } .v2b .level.flip .ltext{ order:0; } }
+.v2b .level .badge { font-family: var(--pixel); font-size: 10px; padding: 8px 12px; display: inline-block; border: 3px solid #160f08; color: #160f08; }
+.v2b .level.l1 .badge { background: var(--lv1); }
+.v2b .level.l2 .badge { background: var(--lv2); }
+.v2b .level.l3 .badge { background: var(--lv3); }
+.v2b .level h2 { font-family: var(--pixel); font-size: clamp(16px,2.6vw,26px); line-height: 1.5; margin: 18px 0 0; color: var(--cream); }
+.v2b .level p { margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: var(--cream-dim); max-width: 44ch; }
+.v2b .level .link { display: inline-block; margin-top: 22px; font-family: var(--vt); font-size: 24px; color: var(--coin); text-decoration: none; }
+.v2b .level .link:hover { text-decoration: underline; }
+/* chunky pixel frame around real photo */
+.v2b .pframe { padding: 10px; background: var(--panel); border: 3px solid #160f08; box-shadow: 8px 8px 0 var(--line); }
+.v2b .pframe img { display: block; width: 100%; aspect-ratio: 5/4; object-fit: cover; image-rendering: auto; }
+
+/* insert coin CTA */
+.v2b .coinbar { padding: 90px 0; text-align: center; border-top: 3px dashed var(--line); }
+.v2b .coinbar .blink { font-family: var(--pixel); font-size: clamp(16px,3vw,30px); color: var(--coin); animation: v2b-blink 1.05s steps(1) infinite; }
+@keyframes v2b-blink { 50% { opacity: 0; } }
+.v2b .coinbar p { font-family: var(--vt); font-size: 24px; color: var(--cream-dim); margin: 18px 0 28px; }
+
+/* footer */
+.v2b .foot { border-top: 3px solid var(--line); background: var(--bg-2); }
+.v2b .foot .inner { padding: 40px 0 60px; display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; font-family: var(--vt); font-size: 20px; }
+.v2b .foot a { color: var(--cream-dim); text-decoration: none; display: block; line-height: 1.9; }
+.v2b .foot a:hover { color: var(--coin); }
+.v2b .foot h4 { font-family: var(--pixel); font-size: 9px; color: var(--cream); letter-spacing: 1px; margin: 0 0 12px; }
+.v2b .foot .cols { display: flex; gap: 48px; flex-wrap: wrap; }
+
+/* version switcher */
+.v2b .ribbon { position: fixed; bottom: 16px; left: 16px; z-index: 50; display: flex; gap: 6px; }
+.v2b .ribbon a { font-family: var(--vt); font-size: 18px; background: var(--panel); border: 2px solid var(--line); color: var(--cream); padding: 4px 12px; text-decoration: none; }
+.v2b .ribbon a.on { background: var(--coin); color: #160f08; border-color: #160f08; }
