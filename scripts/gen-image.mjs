@@ -41,14 +41,23 @@ const out = arg("out");
 const prompt = arg("prompt");
 const model = arg("model", "gemini-2.5-flash-image");
 const aspect = arg("aspect", "4:3");
+const inputImg = arg("image"); // optional: image-to-image edit
 if (!out || !prompt) {
   console.error('Required: --out <file.png> --prompt "<text>"');
   process.exit(1);
 }
 
+// Build content parts — prepend the input image for img2img edits.
+const parts = [];
+if (inputImg) {
+  const buf = readFileSync(inputImg.startsWith("/") ? inputImg : join(root, inputImg));
+  parts.push({ inlineData: { mimeType: "image/png", data: buf.toString("base64") } });
+}
+parts.push({ text: prompt });
+
 const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
 const body = {
-  contents: [{ parts: [{ text: prompt }] }],
+  contents: [{ parts }],
   generationConfig: {
     responseModalities: ["IMAGE"],
     imageConfig: { aspectRatio: aspect },

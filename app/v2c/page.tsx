@@ -21,7 +21,7 @@ const CARDS = [
     title: "Run the whole shop",
     body: "An integrated system to streamline operations, reach wider audiences, and maximize market presence.",
     href: "/v2c/restaurants",
-    img: "/real/nearshop-pos.png",
+    img: "/generated/nearshop-warm.png",
     fit: "cover" as const,
     alt: "The NearGo dual-screen POS device",
   },

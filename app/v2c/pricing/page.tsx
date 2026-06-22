@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const PLANS = [
   {
     name: "NearShop One", tag: "Best value", featured: true,
-    banner: "/real/nearshop-pos.png", bannerAlt: "The NearGo dual-screen POS, bundled free",
+    banner: "/generated/nearshop-warm.png", bannerAlt: "The NearGo dual-screen POS, bundled free",
     was: "5988 AED", price: "3999", unit: "AED / year",
     desc: "Enroll in the one-year program to access VIP business privileges.",
     benefits: ["NearShop Duo 2999 AED — Free", "NearPay Move 999 AED — Free", "Full suite of marketing tools", "Optimal payment transaction rate", "NearBoss advanced features — full access"],

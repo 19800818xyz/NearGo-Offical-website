@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 };
 
 const APPS = [
-  { name: "NearGo", role: "For customers", img: "/generated/app-customer.png", alt: "A customer paying with a smartphone in a shop", body: "Discover nearby stores, order and pay across the MENA region — one app to connect with millions of merchants." },
-  { name: "NearBoss", role: "For merchants", img: "/generated/app-merchant.png", alt: "An owner reviewing sales on a tablet", body: "Run your store from your pocket: orders, members, real-time reports and AI-assisted operations." },
-  { name: "NearRider", role: "For riders", img: "/generated/app-rider.png", alt: "A delivery rider by a scooter on a city street", body: "Delivery made simple — accept orders, optimize routes, and track earnings in real time." },
+  { name: "NearGo", role: "For customers", img: "/real/neargo-app.png", fit: "contain" as const, alt: "The NearGo customer app — rewards and payment", body: "Discover nearby stores, order and pay across the MENA region — one app to connect with millions of merchants." },
+  { name: "NearBoss", role: "For merchants", img: "/real/nearboss-app.png", fit: "contain" as const, alt: "The NearBoss merchant app — Growth dashboard", body: "Run your store from your pocket: orders, members, real-time reports and AI-assisted operations." },
+  { name: "NearRider", role: "For riders", img: "/generated/app-rider.png", fit: "cover" as const, alt: "A delivery rider by a scooter on a city street", body: "Delivery made simple — accept orders, optimize routes, and track earnings in real time." },
 ];
 
 function Store() {
@@ -40,8 +40,10 @@ export default function V2cDownload() {
         <div className="apps">
           {APPS.map((a) => (
             <div className="card" key={a.name}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={a.img} alt={a.alt} loading="lazy" />
+              <div className="panel">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className={a.fit} src={a.img} alt={a.alt} loading="lazy" />
+              </div>
               <div className="body">
                 <div className="pname">{a.role}</div>
                 <h3>{a.name}</h3>

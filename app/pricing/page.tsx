@@ -19,7 +19,7 @@ const PLANS = [
     unit: "AED / year",
     desc: "Enrolling in the one-year program will enable you to access VIP business privileges.",
     featured: true,
-    banner: "/real/nearshop-pos.png",
+    banner: "/generated/nearshop-warm.png",
     bannerAlt: "The NearGo dual-screen POS, bundled free",
     benefits: [
       "NearShop Duo 2999 AED — Free",

@@ -42,7 +42,7 @@ const PRODUCTS: Product[] = [
     cta: "Explore NearShop",
     flip: true,
     icon: <ShopIcon />,
-    image: "/real/nearshop-pos.png",
+    image: "/generated/nearshop-warm.png",
     alt: "The NearGo dual-screen POS device",
   },
   {

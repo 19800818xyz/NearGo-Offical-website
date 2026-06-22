@@ -18,8 +18,9 @@ const APPS = [
     name: "NearGo",
     role: "For Customers",
     icon: <ShopIcon />,
-    image: "/generated/app-customer.png",
-    alt: "A customer browsing and paying with a smartphone in a shop",
+    image: "/real/neargo-app.png",
+    fit: "contain" as const,
+    alt: "The NearGo customer app — rewards, membership and payment",
     desc: "Discover nearby stores, order and pay across the MENA region — one app to connect with millions of local and international merchants.",
   },
   {
@@ -27,8 +28,9 @@ const APPS = [
     role: "For Merchants",
     icon: <ChartIcon />,
     ai: true,
-    image: "/generated/app-merchant.png",
-    alt: "A business owner reviewing sales on a tablet behind the counter",
+    image: "/real/nearboss-app.png",
+    fit: "contain" as const,
+    alt: "The NearBoss merchant app — Growth dashboard",
     desc: "Run your store from your pocket: orders, members, real-time sales reports and AI-assisted operations for business owners.",
   },
   {
@@ -36,6 +38,7 @@ const APPS = [
     role: "For Riders",
     icon: <BikeIcon />,
     image: "/generated/app-rider.png",
+    fit: "cover" as const,
     alt: "A delivery rider with an insulated backpack by a scooter on a city street",
     desc: "Delivery made simple — accept orders, optimize your routes, and track earnings in real time.",
   },
@@ -67,9 +70,21 @@ function AppCard({ app }: { app: (typeof APPS)[number] }) {
       className="flex h-full flex-col items-start overflow-hidden rounded-card"
       style={{ background: "var(--bg-card)", border: "1px solid var(--line)" }}
     >
-      <div className="relative w-full">
+      <div
+        className="relative w-full"
+        style={{
+          aspectRatio: "4 / 3",
+          background: app.fit === "contain" ? "linear-gradient(135deg, var(--accent-soft), var(--bg-icon))" : "var(--bg-card)",
+        }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={app.image} alt={app.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+        <img
+          src={app.image}
+          alt={app.alt}
+          loading="lazy"
+          className={app.fit === "contain" ? "h-full w-full object-contain p-4" : "h-full w-full object-cover"}
+          style={app.fit === "contain" ? { filter: "drop-shadow(0 16px 26px rgba(58,36,24,0.22))" } : undefined}
+        />
         <div
           className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-btn"
           style={{
