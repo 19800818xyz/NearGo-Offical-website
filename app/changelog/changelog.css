@@ -1,0 +1,45 @@
+/* Changelog page — warm, scoped under .changelog */
+.changelog {
+  --c-card: #ffffff;
+  --c-accent: #b4541f;
+  --c-add: #1f7a3d; --c-addbg: #e9f6ee; --c-del: #a23a2a; --c-delbg: #fbece8;
+  --c-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  background: var(--bg);
+  color: var(--ink);
+}
+.changelog .wrap { max-width: 880px; margin: 0 auto; padding: 48px 22px 80px; }
+.changelog .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-accent); font-weight: 700; }
+.changelog h1 { font-size: 32px; letter-spacing: -.02em; margin: 8px 0 6px; }
+.changelog .sub { color: var(--ink-2); font-size: 14px; }
+.changelog .sub a { color: var(--c-accent); text-decoration: none; }
+.changelog .sub a:hover { text-decoration: underline; }
+
+.changelog .commit { background: var(--c-card); border: 1px solid var(--line); border-radius: 16px; margin-top: 26px; overflow: hidden; }
+.changelog .chead { padding: 20px 22px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: flex-start; }
+.changelog .badge { flex: none; width: 30px; height: 30px; border-radius: 9px; background: var(--c-accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+.changelog .ctitle { font-size: 17px; font-weight: 700; margin: 0 0 4px; }
+.changelog .cmeta { font-size: 12px; color: var(--ink-3); font-family: var(--c-mono); }
+.changelog .cmeta .plus { color: var(--c-add); } .changelog .cmeta .minus { color: var(--c-del); }
+.changelog .cbody { padding: 6px 22px 22px; }
+.changelog .pt { margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.changelog .pt .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-accent); flex: none; }
+.changelog .pt code, .changelog .desc code { font-family: var(--c-mono); font-size: 11px; }
+.changelog .desc { font-size: 14px; color: var(--ink-2); margin: 0 0 6px; }
+
+.changelog .diff { font-family: var(--c-mono); font-size: 12.5px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 8px 0 4px; }
+.changelog .diff div { padding: 4px 12px; white-space: pre-wrap; word-break: break-word; }
+.changelog .diff .del { background: var(--c-delbg); color: var(--c-del); }
+.changelog .diff .add { background: var(--c-addbg); color: var(--c-add); }
+.changelog .diff .ctx { color: var(--ink-3); }
+
+.changelog .stat { margin-top: 12px; background: var(--bg-card); border-radius: 10px; padding: 6px 14px; }
+.changelog .statrow { display: flex; justify-content: space-between; gap: 12px; font-family: var(--c-mono); font-size: 12px; padding: 5px 0; border-top: 1px solid var(--line); }
+.changelog .statrow:first-child { border-top: none; }
+.changelog .statrow .n { color: var(--ink-3); white-space: nowrap; }
+.changelog .plus { color: var(--c-add); } .changelog .minus { color: var(--c-del); }
+
+.changelog .effect { margin-top: 12px; background: var(--accent-soft); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13.5px; color: var(--ink-2); }
+.changelog .effect b { color: var(--ink); }
+.changelog .tag { display: inline-block; font-size: 11px; font-family: var(--c-mono); background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; color: var(--ink-2); margin: 0 4px 4px 0; }
+.changelog .total { margin-top: 28px; font-size: 13px; color: var(--ink-3); text-align: center; }
+.changelog .total code { font-family: var(--c-mono); background: var(--bg-card); padding: 1px 6px; border-radius: 5px; }
