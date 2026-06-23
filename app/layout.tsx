@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VersionSwitcher } from "@/components/version-switcher";
+import { AiButlerMount } from "@/components/ai-butler/ai-butler";
 
 export const metadata: Metadata = {
   title: "NearGo — Unlock Growth with Easy Management & Operations",
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>{children}</ThemeProvider>
         <VersionSwitcher />
+        <AiButlerMount />
       </body>
     </html>
   );

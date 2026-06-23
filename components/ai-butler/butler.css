@@ -1,0 +1,106 @@
+/* AI Butler — mock chat widget. Two variants via data-variant. Mounted at root. */
+.ab { position: fixed; z-index: 9990; }
+
+/* ---- variant tokens ---- */
+.ab[data-variant="v1"] {
+  --ab-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "PingFang SC", sans-serif;
+  --ab-ball: linear-gradient(135deg, #ffaa00, #ee8f24 50%, #cc785c);
+  --ab-glow: rgba(230,133,52,.5);
+  --ab-icon: #2a1a10;
+  --ab-bg: #faf7f0;
+  --ab-header: linear-gradient(160deg, #b85b18, #93420f);
+  --ab-ai-bubble: #f3eee4;
+  --ab-ai-text: #2a1a10;
+  --ab-user-bubble: #e68534;
+  --ab-user-text: #2a1a10;
+  --ab-ink: #2a1a10; --ab-ink2: #6b5346; --ab-line: #e8ddc9;
+  --ab-accent: #a85a40; --ab-dot: #0a6e7e;
+  --ab-radius: 16px;
+}
+.ab[data-variant="v2c"] {
+  --ab-font: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ab-ball: linear-gradient(135deg, #635bff, #4cc6ff);
+  --ab-glow: rgba(99,91,255,.45);
+  --ab-icon: #ffffff;
+  --ab-bg: #ffffff;
+  --ab-header: linear-gradient(120deg, #0a2540, #1c3a5e);
+  --ab-ai-bubble: #f1f5fb;
+  --ab-ai-text: #0a2540;
+  --ab-user-bubble: #635bff;
+  --ab-user-text: #ffffff;
+  --ab-ink: #0a2540; --ab-ink2: #425466; --ab-line: #e6ebf1;
+  --ab-accent: #635bff; --ab-dot: #1f7a3d;
+  --ab-radius: 14px;
+}
+.ab * { box-sizing: border-box; font-family: var(--ab-font); }
+
+/* ---- floating ball ---- */
+.ab-ball {
+  position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px; border-radius: 50%;
+  border: none; cursor: pointer; background: var(--ab-ball); color: var(--ab-icon);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 30px var(--ab-glow); animation: ab-pulse 2s ease infinite;
+  transition: transform .15s;
+}
+.ab-ball:hover { transform: scale(1.06); }
+.ab-ball:active { transform: scale(.96); }
+.ab-ball .badge { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; background: #b0464a; color: #fff; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; border: 2px solid var(--ab-bg); }
+@keyframes ab-pulse {
+  0% { box-shadow: 0 10px 30px var(--ab-glow), 0 0 0 0 var(--ab-glow); }
+  70% { box-shadow: 0 10px 30px var(--ab-glow), 0 0 0 12px transparent; }
+  100% { box-shadow: 0 10px 30px var(--ab-glow), 0 0 0 0 transparent; }
+}
+
+/* ---- overlay + drawer ---- */
+.ab-overlay { position: fixed; inset: 0; background: rgba(20,12,6,.28); z-index: 9995; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.ab-overlay.open { opacity: 1; pointer-events: auto; }
+.ab-drawer {
+  position: fixed; top: 0; right: 0; height: 100%; width: 400px; max-width: 100vw; z-index: 10000;
+  background: var(--ab-bg); display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .28s cubic-bezier(.4,0,.2,1);
+  box-shadow: -20px 0 60px rgba(20,12,6,.22);
+}
+.ab-drawer.open { transform: translateX(0); }
+@media (max-width: 480px) { .ab-drawer { width: 100vw; } }
+
+/* header */
+.ab-head { background: var(--ab-header); color: #fff; padding: 18px 18px; display: flex; align-items: center; gap: 12px; }
+.ab-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--ab-ball); display: flex; align-items: center; justify-content: center; color: var(--ab-icon); flex: none; box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
+.ab-head .t { font-size: 16px; font-weight: 700; line-height: 1.2; }
+.ab-head .s { font-size: 12px; opacity: .9; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.ab-head .s i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; display: inline-block; }
+.ab-x { margin-left: auto; background: rgba(255,255,255,.16); border: none; color: #fff; width: 32px; height: 32px; border-radius: 9px; cursor: pointer; font-size: 18px; line-height: 1; }
+.ab-x:hover { background: rgba(255,255,255,.28); }
+
+/* messages */
+.ab-msgs { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.ab-row { display: flex; gap: 8px; max-width: 88%; }
+.ab-row.ai { align-self: flex-start; }
+.ab-row.me { align-self: flex-end; flex-direction: row-reverse; }
+.ab-mini { width: 26px; height: 26px; border-radius: 50%; background: var(--ab-ball); flex: none; display: flex; align-items: center; justify-content: center; color: var(--ab-icon); margin-top: 2px; }
+.ab-bubble { padding: 10px 13px; font-size: 14px; line-height: 1.5; border-radius: var(--ab-radius); }
+.ab-row.ai .ab-bubble { background: var(--ab-ai-bubble); color: var(--ab-ai-text); border-bottom-left-radius: 4px; }
+.ab-row.me .ab-bubble { background: var(--ab-user-bubble); color: var(--ab-user-text); border-bottom-right-radius: 4px; }
+
+/* typing dots */
+.ab-typing { display: flex; gap: 4px; padding: 12px 14px; }
+.ab-typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--ab-ink2); opacity: .5; animation: ab-blink 1.2s infinite; }
+.ab-typing span:nth-child(2) { animation-delay: .2s; } .ab-typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes ab-blink { 0%,60%,100% { opacity: .25; transform: translateY(0); } 30% { opacity: .9; transform: translateY(-3px); } }
+
+/* quick chips */
+.ab-chips { padding: 0 18px 8px; display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-chip { font-size: 13px; padding: 7px 12px; border-radius: 999px; cursor: pointer; background: transparent; color: var(--ab-accent); border: 1px solid var(--ab-line); }
+.ab-chip:hover { border-color: var(--ab-accent); }
+
+/* input */
+.ab-input { border-top: 1px solid var(--ab-line); padding: 12px; display: flex; gap: 8px; align-items: center; }
+.ab-input input { flex: 1; border: 1px solid var(--ab-line); border-radius: 999px; padding: 11px 16px; font-size: 14px; color: var(--ab-ink); background: var(--ab-bg); outline: none; }
+.ab-input input:focus { border-color: var(--ab-accent); }
+.ab-send { width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; background: var(--ab-ball); color: var(--ab-icon); display: flex; align-items: center; justify-content: center; flex: none; box-shadow: 0 4px 12px var(--ab-glow); }
+.ab-send:disabled { opacity: .5; cursor: default; box-shadow: none; }
+.ab-note { text-align: center; font-size: 11px; color: var(--ab-ink2); padding: 0 0 10px; opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) { .ab-ball { animation: none; } .ab-drawer { transition: none; } }
