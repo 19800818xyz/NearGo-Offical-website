@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VersionSwitcher } from "@/components/version-switcher";
-import { AiButlerMount } from "@/components/ai-butler/ai-butler";
 
 export const metadata: Metadata = {
   title: "NearGo — Unlock Growth with Easy Management & Operations",
@@ -27,7 +27,17 @@ export default function RootLayout({
       <body>
         <ThemeProvider>{children}</ThemeProvider>
         <VersionSwitcher />
-        <AiButlerMount />
+        {/* ShopMind — real RAG-backed chat widget (external). Replaces the earlier canned mock. */}
+        <Script
+          src="https://neargo-rag-kb-2.onrender.com/widget.js"
+          strategy="afterInteractive"
+          data-title="ShopMind"
+          data-subtitle="Online"
+          data-color="#E8862F"
+          data-welcome="Hi! I'm ShopMind. Ask me about NearShop, NearPay, pricing or getting started."
+          data-placeholder="Ask anything about NearGo..."
+          data-suggestions="What is NearShop?|NearPay fees?|Pricing plans|How do I sign up?"
+        />
       </body>
     </html>
   );
