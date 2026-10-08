@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VersionSwitcher } from "@/components/version-switcher";
+import { KnocketPosition } from "@/components/knocket-position";
 
 export const metadata: Metadata = {
   title: "NearGo — Unlock Growth with Easy Management & Operations",
@@ -38,6 +39,12 @@ export default function RootLayout({
           data-placeholder="Ask anything about NearGo..."
           data-suggestions="What is NearShop?|NearPay fees?|Pricing plans|How do I sign up?"
         />
+        {/* Knocket — multi-channel live-chat / contact widget (TRTC). */}
+        <Script
+          src="https://trtc.io/knocket-sdk/sdk.js?identifier=f61c5e61182289c52c&v=1791443706504"
+          strategy="afterInteractive"
+        />
+        <KnocketPosition />
       </body>
     </html>
   );
