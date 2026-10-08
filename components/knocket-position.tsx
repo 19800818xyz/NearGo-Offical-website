@@ -15,16 +15,21 @@ import { useEffect } from "react";
  */
 const OVERRIDE_ID = "knocket-pos-override";
 const OVERRIDE_CSS = `
-/* launcher ball → bottom-left, raised above the version switcher */
+/* launcher ball → bottom-left (all sizes), raised above the version switcher,
+   so it never stacks on the ShopMind ball in the bottom-right */
 .trtc-float-card.widget-sdk-float-card{
   left: 20px !important;
   right: auto !important;
   bottom: 84px !important;
 }
-/* chat panel → also open from the left so it stays with its launcher */
-.trtc-knocket-card{
-  left: 20px !important;
-  right: auto !important;
+/* chat panel → open from the left too, but ONLY on desktop where it's a
+   floating card. On mobile the panel is full-screen, so leave it untouched
+   (shifting it left would overflow the right edge). */
+@media (min-width: 768px){
+  .trtc-knocket-card{
+    left: 20px !important;
+    right: auto !important;
+  }
 }
 `;
 
